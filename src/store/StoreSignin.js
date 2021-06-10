@@ -69,7 +69,7 @@ const StoreSignin=()=>{
      const redirectUser=()=>{
         if(redirectToReferrer)
         {
-          return <Redirect to="/store/signin"/> 
+          return <Redirect to="/store/dashboard"/> 
         }
      }
 

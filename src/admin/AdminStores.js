@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react"
 import AdminLayout from "../core/adminCore/AdminLayout"
 import StoreCard from "../core/adminCore/StoreCard"
+import AddCategory from "../core/adminCore/AddCategory"
 import {getStores} from "../core/adminCore/adminAPI"
+
 
 const AdminStores=()=>{
    const [stores,setStores]=useState([])
@@ -24,11 +26,12 @@ const AdminStores=()=>{
     return(
         <AdminLayout title="See Stores" description="You Can Manage HouEzy From Here.">
             <div className="container-fluid">
+             
             {stores.map((store,i)=>(
                 
                 <div  key={i} className="col-11 col-lg-7 mx-auto mb-3 shadow">
                 <StoreCard store={store}/>
-                {console.log(store)}
+               
                 </div>
             ))} 
             </div>

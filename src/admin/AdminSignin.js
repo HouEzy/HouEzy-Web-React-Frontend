@@ -69,7 +69,7 @@ const AdminSignin=()=>{
      const redirectUser=()=>{
         if(redirectToReferrer)
         {
-          return <Redirect to="/"/> 
+          return <Redirect to="/admin/dashboard"/> 
         }
      }
 

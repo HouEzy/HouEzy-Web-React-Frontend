@@ -1,19 +1,17 @@
 import React from "react"
+import {isAuthenticated} from "../../auth/storeAuth"
 
 import StoreSideBar from "./StoreSideBar"
 
 
 
-const StoreLayout=({title="",description="",children})=>(
+const StoreLayout=({children})=>(
    
-       <div>        
-        <StoreSideBar />        
-        <div className="jumbotron bg-info text-center container-fluid">
-            <h2 >{title}</h2>
-            <p >{description}</p>
-        </div>
+       <div> 
+               
        
-        
+        <StoreSideBar /> 
+        {isAuthenticated() && !JSON.parse(localStorage.getItem("storeStatus")) && (<p className="alert alert-sm alert-danger text-center small mb-0 h-25">Store is Closed. Set it Open for Recieving Orders.</p>)}       
         <div>{children}</div>
         </div>
 );

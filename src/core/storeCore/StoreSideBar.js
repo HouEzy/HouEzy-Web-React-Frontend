@@ -1,7 +1,8 @@
 import React,{useState} from "react"
 import {Link,withRouter} from "react-router-dom"
 import {signout,isAuthenticated} from "../../auth/storeAuth"
-
+import SearchProducts from "./SearchProducts"
+import StoreOpenClose from "./StoreOpenClose"
 //import react pro sidebar components
 import {
   ProSidebar,
@@ -40,13 +41,13 @@ const Header = () => {
 
     <>
     <div>
-    <nav className="navbar navbar-expand nav-primary ml-2">
+    
+    <nav className="navbar navbar-default  navbar-expand nav-primary ml-2 bg-info">
     {isAuthenticated() && (<button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>)}
                  
-                 <Link className="navbar-brand " to="/"><h1 className="text-dark">HouEzy</h1></Link>
-                 <sup className="badge text-muted border border-warning">SELLER</sup>
+                 <Link className="navbar-brand " to="/"><h4 className="text-dark">HouEzy</h4></Link>
+                 <sup className="badge text-white border border-warning">SELLER</sup>
                  
-
                  
                  <ul className="navbar-nav ms-auto">
                     {!isAuthenticated() && (
@@ -57,31 +58,34 @@ const Header = () => {
                      
                      
                      
-                 </ul>                      
+                 </ul>  
+                                    
     </nav>
+    
     </div>
-    {isAuthenticated() && (
+    {isAuthenticated() && isAuthenticated().loggedInMember.role=="Store" && (
       <div id="header">
             
           {/* collapsed props to change menu size using menucollapse state */}
-        <ProSidebar collapsed={menuCollapse}>
+        <ProSidebar collapsed={menuCollapse} >
           <SidebarHeader>
           <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p>{isAuthenticated().store.businessName}</p>
+              <p className="">{isAuthenticated().loggedInMember.businessName}</p>
             </div>
+            <StoreOpenClose className="m-0 p-0" />
            
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
               <MenuItem icon={<MdDashboard />}>
-                Dashboard
+                Dashboard<Link to="/store/dashboard" />
               </MenuItem>
-              <MenuItem icon={<RiProductHuntLine />}>Products <Link to="/" /></MenuItem>
-              <MenuItem icon={<MdCollectionsBookmark />}>Collections</MenuItem>
+              
+              <MenuItem icon={<RiProductHuntLine />}>Products <Link to="/store/products" /></MenuItem>
               <MenuItem icon={<MdBorderOuter />}>Orders</MenuItem>
               <MenuItem icon={<MdGraphicEq />}>Sales</MenuItem>
-              <MenuItem icon={<BiCog />}>Account</MenuItem>
+              <MenuItem icon={<BiCog />}>Profile</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>

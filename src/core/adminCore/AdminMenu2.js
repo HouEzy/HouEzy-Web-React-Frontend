@@ -2,6 +2,7 @@ import React,{useState} from "react"
 import {Link,withRouter} from "react-router-dom"
 import {signout,isAuthenticated} from "../../auth/adminAuth"
 
+
 //import react pro sidebar components
 import {
   ProSidebar,
@@ -40,10 +41,10 @@ const Header = () => {
 
     <>
     <div>
-    <nav className="navbar navbar-expand nav-primary ml-2 ">
-    {isAuthenticated() && isAuthenticated().admin.role ==="Admin" && (<button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>)}
+    <nav className="navbar navbar-expand bg-info ml-2 ">
+    {isAuthenticated() && isAuthenticated().loggedInMember.role ==="Admin" && (<button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>)}
                  
-                 <Link className="navbar-brand " to="/"><h1 className="text-dark">HouEzy</h1></Link>
+                 <Link className="navbar-brand " to="/"><h1 className="text-dark d-inline-block ">HouEzy</h1></Link>
                  <sup className="badge text-muted border border-warning">ADMIN</sup>
                  
 
@@ -68,7 +69,7 @@ const Header = () => {
           <SidebarHeader>
           <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p>{isAuthenticated().admin.name}</p>
+              <p>{isAuthenticated().loggedInMember.name}</p>
             </div>
            
           </SidebarHeader>
@@ -77,7 +78,7 @@ const Header = () => {
               <MenuItem icon={<MdDashboard />}>
                 Dashboard
               </MenuItem>
-              <MenuItem icon={<RiProductHuntLine />}>Stores<Link to="/" /></MenuItem>
+              <MenuItem icon={<RiProductHuntLine />}>Stores<Link to="/admin/stores" /></MenuItem>
               <MenuItem icon={<MdCollectionsBookmark />}>Orders</MenuItem>
               <MenuItem icon={<MdBorderOuter />}>Sales</MenuItem>
               <MenuItem icon={<MdGraphicEq />}>Payments</MenuItem>

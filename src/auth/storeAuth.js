@@ -42,7 +42,7 @@ export const signin=(store)=>{
      if(typeof window !== "undefined")
      {
          localStorage.setItem("jwt",JSON.stringify(data))
-         
+         localStorage.setItem("storeStatus",JSON.stringify(data.loggedInMember.status))
   
          next();
      }
@@ -52,6 +52,7 @@ export const signin=(store)=>{
         if (typeof window !== "undefined")
         {
               localStorage.removeItem("jwt");
+              localStorage.removeItem("storeStatus");
               
               return fetch(`${API}/store-signout`,{
                     method:"GET",

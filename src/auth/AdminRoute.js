@@ -3,7 +3,7 @@ import {Route,Redirect} from "react-router-dom"
 import {isAuthenticated} from "./adminAuth";
 
 const AdminRoute = ({component:Component,...rest})=>(
-    <Route {...rest} render={props => isAuthenticated() && isAuthenticated().admin.role === "Admin" ? (
+    <Route {...rest} render={props => isAuthenticated() && isAuthenticated().loggedInMember.role === "Admin" ? (
         <Component {...props} />
     ):(
         <Redirect 

@@ -3,7 +3,7 @@ import {Route,Redirect} from "react-router-dom"
 import {isAuthenticated} from "./storeAuth";
 
 const StoreRoute = ({component:Component,...rest})=>(
-    <Route {...rest} render={props => isAuthenticated() && isAuthenticated().store.role === "Store" ? (
+    <Route {...rest} render={props => isAuthenticated() && isAuthenticated().loggedInMember.role== "Store" ? (
         <Component {...props} />
     ):(
         <Redirect 

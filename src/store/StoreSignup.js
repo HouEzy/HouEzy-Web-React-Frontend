@@ -4,6 +4,7 @@ import csc from 'country-state-city'
 import {signup} from "../auth/storeAuth"
 
 
+
 const StoreSignup=()=>{ 
 
   const cities=csc.getCitiesOfState("IN","MH")
@@ -38,6 +39,9 @@ const StoreSignup=()=>{
 const clickSubmit=(event)=>{
   event.preventDefault()
   setValues({...values,error:false})
+
+  
+  
   signup({name,email,phoneNo,password,businessName,city,category,address,openTime,closeTime})
   .then(data=>{
         if(data.error)
@@ -63,7 +67,7 @@ const clickSubmit=(event)=>{
               })
         }
   })
-
+ 
 }
     
     const signupForm=()=>(
