@@ -1,15 +1,17 @@
 import React,{useState,useEffect} from "react"
 import {Link, Redirect } from "react-router-dom"
 import UserLayout from "../core/userCore/UserLayout"
+
 import ProductImages from "../core/userCore/ProductImage"
 import {Accordion,Card} from "react-bootstrap"
-import {getCart,razorpayorder,createOrder,emptyCart} from "../core/userCore/userApi"
+import {readStoreByLinkName,getCart,razorpayorder,createOrder,emptyCart} from "../core/userCore/userApi"
 import {isAuthenticated} from "../auth/userAuth"
 
 import {FaChevronCircleDown} from "react-icons/fa"
 
-const Checkout=(props)=>{
+const CheckoutPage=(props)=>{
     
+   
     const [address,setAddress]=useState("")
     const [paymentOption,setPaymentOption]=useState("")
     const [items,setItems]=useState([])
@@ -38,7 +40,9 @@ const Checkout=(props)=>{
         getCart(userId).then(data=>{
             if(data.error)
             {console.log(data.error);}
-            else{setItems(data)}
+            else{
+                console.log(data);
+                setItems(data)}
         })
      }
 
@@ -68,12 +72,15 @@ const Checkout=(props)=>{
             displayRazorpay()
         }
         else{
-            setError("Please select Adress and Payment Mode")
+            setError("Please select Address and Payment Mode")
         }
     }
    
 
     useEffect(()=>{
+       // const storeLinkName=props.match.params.storeLinkName;
+       // loadStoreByLink(storeLinkName)
+
         if(isAuthenticated())
         {
             const userId=isAuthenticated().loggedInMember._id                  
@@ -296,8 +303,7 @@ const Checkout=(props)=>{
                 },
                 prefill: {
                     name:"Khush Agrawal",
-                    email:`${isAuthenticated().loggedInMember.email}`,
-                    phone_number:`7083764294 ${isAuthenticated().loggedInMember.phoneNo}`,
+                    phone_number:`${isAuthenticated().loggedInMember.phoneNo}`,
                    
                 }
             }
@@ -316,8 +322,9 @@ const Checkout=(props)=>{
     }
 
     return(
-        <div>
-           <UserLayout showCategoryBar={false} showSearch={false}>
+        
+        <div className="overflow-auto" style={{height:"100vh"}}>
+           <UserLayout >
            <div className="row mt-md-5">
             {showError()}
            <div className="card col-12 col-md-5 p-4 overflow-auto" style={{height:"60vh"}}>
@@ -336,7 +343,8 @@ const Checkout=(props)=>{
            
            </UserLayout>
         </div>
+        
     )
 }
 
-export default Checkout
+export  {CheckoutPage}

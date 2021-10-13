@@ -6,23 +6,24 @@ import AddToCart from "./AddToCart"
 const ProductCard=({product})=>{
     
    return(
-       <div className="card ">
+       <div className="card" height="">
           <Link to={`/product/${product._id}`}  className="text-decoration-none text-dark">
-          <div className="card-header  h6 text-center bg-info">{product.name}</div>
+          
            <div className="row">
-               <div className="col-4  my-auto">
-               <ProductImages  product={product} className="" />
+               <div className="col-3 col-md-2  my-auto" >
+               <ProductImages product={product} className=""  />
                </div>
-               <div className="col-7  my-auto">
-              
-                <div className="card-body m-0">  
+               <div className="col-9  col-md-10 ">
+               <div className="card-header  h3  bg-transparent">{product.name}</div>
+                <div className="card-body m-0 ">  
                                     
-                    <p className="m-0">{product.description.substring(0,50) + `.....`}</p>
-                    <p className="lead text-danger m-0">₹{product.mrp} <del>(₹{product.mrp + product.mrp *(50/100)})</del> </p>
+                    <p className="m-0 ">per {product.unit}</p>
+                    <div className="row">
+                    <span className=" col-7 d-inline-block h5 m-0">₹{product.sellingPrice} <del className="text-muted">(₹{product.mrp })</del> </span>
+                    <span className=" col-4 d-inline-block ms-auto"><AddToCart product={product} /></span>
+                    </div>
                 </div>
-                <div className="col-5 mx-auto">
-                 <AddToCart product={product} />
-                </div>
+                
             </div>
                </div>
           </Link> 

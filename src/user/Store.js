@@ -4,6 +4,10 @@ import StoreImage from "../core/userCore/StoreImage"
 import ProductCard from "../core/userCore/ProductCard"
 import {readStore,listCollectionsByStore,getProductsByCollection,getProductsByStore} from "../core/userCore/userApi"
 
+import {Dropdown} from "react-bootstrap"
+import { MdSearch } from "react-icons/md";
+
+
 const Store=(props)=>{
 
     const storeId = props.match.params.storeId
@@ -56,6 +60,8 @@ const Store=(props)=>{
     }
 
     const clickCollection=(event)=>{
+        event.preventDefault()
+        console.log(event.target.value);
         setSelectedCollection(event.target.value)
         if(event.target.value==0)
         {
@@ -72,10 +78,6 @@ const Store=(props)=>{
         }
 
     }
-
-
-
-
 
     useEffect(()=>{
         const storeId = props.match.params.storeId
@@ -103,33 +105,45 @@ const Store=(props)=>{
             </div>
             </div>
             
-            <div className="col-12 col-md-5 mx-auto">{SearchBar()}</div>
+            <div className="col-12 col-md-7 mx-auto">{SearchBar()}</div>
         </div>
     )
     const ShowCollections=()=>(
         <div className="row flex-nowrap">
          
-        <div className="w-auto">
+        <div className="w-auto" style={{zIndex:"1"}}>
            <button onClick={clickCollection} className="btn  btn-center small h-75 mr-2" value={0}>All</button>
         </div>
         {collections && collections.map((collection,i)=>(
-         <div className="w-auto">
+         <div className="w-auto" style={{zIndex:"1"}}>
            <button onClick={clickCollection}   key={i} className="btn  btn-center small h-75 mr-3" value={collection._id}>{collection.name}</button>
         </div>
-            
-
-        ))}
-        
-    
+        ))}    
      </div>
     )
 
     const SearchBar=()=>(
         <form className="p-2" >            
             <div className="input-group">
+            <div className="input-group-prepend bg-white col-4 col-md-2 mx-auto rounded">
+                    <Dropdown>
+                     <Dropdown.Toggle variant="info" id="dropdown-basic">
+                        Collection
+                     </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item><button className="btn" onClick={clickCollection}  value={0} >All</button></Dropdown.Item>
+                      {collections.map((c,i)=>(
+                                 <Dropdown.Item key={i} >
+                                 <button className="btn" onClick={clickCollection}  value={c._id} >{c.name}</button>
+                                 </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
             <input type="search" className="form-control" placeholder={`Search in ${store.businessName}`}  />
             <div className="input-group-append">
-              <button className="btn btn-info" type="button">Search</button>
+              <button className="btn btn-info" type="button"><MdSearch className="h5" /></button>
             </div>
             </div>           
         </form>
@@ -140,7 +154,7 @@ const Store=(props)=>{
             <div className="row mt-2">
                    
                    {products.map((product,i)=>(
-                      <div key={i} className="col-12 col-md-5 mx-auto  mb-3 mr-4 p-0 shadow-lg">
+                      <div key={i} className="col-11 col-md-5 mx-auto  mb-3 mr-4 p-0 shadow-lg">
                        <ProductCard product={product} />
                       </div>
                    ))}
@@ -150,7 +164,7 @@ const Store=(props)=>{
 
 
     return(
-        <div className=" m-0">
+        <div className="overflow-auto" style={{height:"100vh"}}>
             <UserLayout showSearch={false} showCategoryBar={false}>
             <div className="">
                 {storeDetails()}

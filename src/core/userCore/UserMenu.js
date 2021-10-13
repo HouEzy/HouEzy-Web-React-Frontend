@@ -24,7 +24,7 @@ import {
  import "../../styles/storeSideBar.css";
 
 
-const UserMenu=()=>{
+const UserMenu=({showSidebar=true})=>{
    const [menuCollapse, setMenuCollapse] = useState(true)
 
     //create a custom function that will change menucollapse state from false to true and true to false
@@ -38,14 +38,15 @@ const UserMenu=()=>{
    <>
    <div>
    
-   <nav className="navbar navbar-default navbar-static-top  navbar-expand nav-primary ml-2 bg-info">
-   <button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>
+   <nav className="navbar navbar-default   navbar-expand nav-primary ml-2 bg-info " >
+
+   {showSidebar && (   <button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>)}
                 
                 <Link className="navbar-brand" to="/"><h4 className="text-dark ">HouEzy</h4></Link>
                 
                
                 
-                <ul className="nav nav-tabs ms-auto  ">
+                <ul className="nav nav-tabs ms-auto   ">
                    <li className="nav-item m-0"><Link to="/cart" className="nav-link text-dark"><MdShoppingCart/>Cart</Link></li>
                    {!isAuthenticated() && (
                      <li className="nav-item m-0">

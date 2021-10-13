@@ -4,7 +4,7 @@ import ToastMessage from "./ToastMessage"
 import {addItem} from "./cartHelpers"
 import {addToCart,getCart} from "./userApi"
 import {isAuthenticated} from "../../auth/userAuth"
-
+import SignupModal from "./SignUpModal";
 
 const AddToCart=({product})=>{
    
@@ -30,7 +30,7 @@ const AddToCart=({product})=>{
 
     const showButton=()=>(
         <div>
-            <button onClick={clickButton} className="btn btn-outline-info">Add To Cart</button>
+            <button onClick={clickButton} className="btn btn-outline-primary">Add +</button>
         </div>
     )
 

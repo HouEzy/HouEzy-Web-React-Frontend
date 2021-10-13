@@ -48,6 +48,18 @@ export const readStore=(storeId)=>{
     })
 }
 
+export const readStoreByLinkName=(storeLinkName)=>{
+    return fetch(`${API}/store/bylink/${storeLinkName}`,{
+        method:"GET",
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
 export const listCollectionsByStore=(storeId)=>{
     return fetch(`${API}/store/collections/${storeId}`,{
         method:"GET"

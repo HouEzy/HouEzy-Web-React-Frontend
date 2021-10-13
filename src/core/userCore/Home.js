@@ -69,7 +69,7 @@ const Home=(props)=>{
 
    const bannerCarousel=()=>(
       <div className="">
-         <Carousel>
+         <Carousel indicators="false">
   <Carousel.Item interval="2000">
     <img
       className="d-block w-100"
@@ -99,9 +99,9 @@ const Home=(props)=>{
    )
 
    return(
-      <div className="" >
-         <UserLayout>
-          <div className="mt-0">
+      <div className="overflow-auto" style={{height:"100vh"}} >
+         <UserLayout >
+          <div className="mt-3">
              {bannerCarousel()}
           </div>
           <div className="overflow-auto col-12 col-md-11 mx-auto m-0 " style={{overflow:"hidden"}}>

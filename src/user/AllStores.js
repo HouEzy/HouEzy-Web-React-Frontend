@@ -27,7 +27,7 @@ const AllStores=(props)=>{
 
 
     return(
-        <div>
+        <div className="overflow-auto" style={{height:"100vh"}}>
             <UserLayout >
             <div className="col-12 col-md-10 mx-auto overflow-auto" style={{height:"70vh",overflowX:"hidden",overflowY:"hidden"}}>
             <div className="row">

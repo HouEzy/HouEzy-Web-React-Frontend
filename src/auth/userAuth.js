@@ -20,6 +20,45 @@ export const signup=(user)=>{
     })
 }
 
+export const sendOtp=(phoneNo)=>{
+      return fetch(`${API}/send-otp?phoneNo=${phoneNo}`,{
+            method:"POST",
+            headers:{
+                  Accept:"application/json",
+                  "Content-Type":"application/json"
+            },
+            
+      })
+      .then((data)=>{
+            return data.json()
+                  
+            
+      })
+      .catch(err=>{
+            console.log(err);
+      })
+}
+
+export const verifyOtp=(phoneNo,code)=>{
+      return fetch(`${API}/verify-otp?phoneNo=${phoneNo}&code=${code}`,{
+            method:"GET",
+            headers:{
+                  Accept:"application/json",
+                  "Content-Type":"application/json"
+            },
+            
+      })
+      .then((data)=>{
+            return data.json()
+                  
+            
+      })
+      .catch(err=>{
+            console.log(err);
+      })
+}
+
+
 export const signin=(user)=>{
     return fetch(`${API}/user-signin`,{
           method:"POST",

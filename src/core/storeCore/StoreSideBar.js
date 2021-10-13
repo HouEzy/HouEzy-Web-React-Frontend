@@ -1,8 +1,12 @@
 import React,{useState} from "react"
 import {Link,withRouter} from "react-router-dom"
 import {signout,isAuthenticated} from "../../auth/storeAuth"
+import moment from "moment"
 import SearchProducts from "./SearchProducts"
 import StoreOpenClose from "./StoreOpenClose"
+
+import {Offcanvas , Button} from "react-bootstrap"
+import OffcanvasMenu from 'react-offcanvas-menu-component';
 //import react pro sidebar components
 import {
   ProSidebar,
@@ -30,6 +34,11 @@ const Header = () => {
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
+    const [show, setShow] = useState(false);
+
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     //create a custom function that will change menucollapse state from false to true and true to false
   const menuIconClick = () => {
@@ -42,11 +51,11 @@ const Header = () => {
     <>
     <div>
     
-    <nav className="navbar navbar-default  navbar-expand nav-primary ml-2 bg-info">
-    {isAuthenticated() && (<button onClick={menuIconClick} className="btn btn-lg"><FaAlignLeft/></button>)}
+    <nav className="navbar navbar-default sticky-top navbar-expand nav-primary ml-2   d-lg-none" style={{backgroundColor:"#082032"}}>
+    {isAuthenticated() && (<button onClick={menuIconClick} className="btn btn-lg text-light"><FaAlignLeft/></button>)}
                  
-                 <Link className="navbar-brand " to="/"><h4 className="text-dark">HouEzy</h4></Link>
-                 <sup className="badge text-white border border-warning">SELLER</sup>
+                 <Link className="navbar-brand " to="/"><h3 className="text-light"><img className="img-fluid" src="/images/BIZZNECT-logo-white.png" width="150px" height="60px"/></h3></Link>
+                 
                  
                  
                  <ul className="navbar-nav ms-auto">
@@ -71,21 +80,30 @@ const Header = () => {
           <SidebarHeader>
           <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p className="">{isAuthenticated().loggedInMember.businessName}</p>
+              <div className="d-none d-lg-flex col-12 mx-auto p-1 justify-content-center">
+                <div className="col-10  my-auto"><img className="" src="/images/BIZZNECT-logo-white.png" width="100%" height="100%"/></div>
+
+
+              </div>
+              
+              <hr/>
+              <h4 className="p-1 text-light  text-wrap text-center" >{isAuthenticated().loggedInMember.businessName}</h4>
             </div>
-            <StoreOpenClose className="m-0 p-0" />
+            
            
           </SidebarHeader>
-          <SidebarContent>
+          <SidebarContent className="overflow-auto" >
             <Menu iconShape="square">
               <MenuItem icon={<MdDashboard />}>
                 Dashboard<Link to="/store/dashboard" />
               </MenuItem>
-              
+              <MenuItem icon={<RiProductHuntLine />}>Collections <Link to="/store/collections" /></MenuItem>
               <MenuItem icon={<RiProductHuntLine />}>Products <Link to="/store/products" /></MenuItem>
-              <MenuItem icon={<MdBorderOuter />}>Orders</MenuItem>
+              <MenuItem icon={<MdBorderOuter />}>Orders<Link to="/store/orders" /></MenuItem>
               <MenuItem icon={<MdGraphicEq />}>Sales</MenuItem>
               <MenuItem icon={<BiCog />}>Profile</MenuItem>
+              
+
             </Menu>
           </SidebarContent>
           <SidebarFooter>

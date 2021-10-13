@@ -29,9 +29,9 @@ const QuantityUpdate=({productItem,setRun = f => f, run = undefined})=>{
     const buttons=()=>(
         <div>
             <div class="btn-group" role="group">
-                <button onClick={decreaseCount} className="btn btn-sm btn-info ">-</button>
+                <button onClick={decreaseCount} className="btn btn-sm btn-primary ">-</button>
                  <p className="p-2">{count}</p>
-                 <button onClick={increaseCount} className="btn btn-sm btn-info">+</button>
+                 <button onClick={increaseCount} className="btn btn-sm btn-primary">+</button>
             </div>
             <div className="row">
                 

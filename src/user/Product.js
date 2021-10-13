@@ -56,7 +56,7 @@ const Product=(props)=>{
    )
 
     return(
-        <div >
+        <div className="overflow-auto" style={{height:"100vh"}} >
             <UserLayout showCategoryBar={false}>
             <div className="col-10 mx-auto mt-5">
                {displayProduct()}

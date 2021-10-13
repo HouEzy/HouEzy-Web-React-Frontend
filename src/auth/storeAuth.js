@@ -19,6 +19,44 @@ export const signup=(store)=>{
     })
 }
 
+export const sendOtp=(phoneNo)=>{
+      return fetch(`${API}/send-otp?phoneNo=${phoneNo}`,{
+            method:"POST",
+            headers:{
+                  Accept:"application/json",
+                  "Content-Type":"application/json"
+            },
+            
+      })
+      .then((data)=>{
+            return data.json()
+                  
+            
+      })
+      .catch(err=>{
+            console.log(err);
+      })
+}
+
+export const verifyOtp=(phoneNo,code)=>{
+      return fetch(`${API}/verify-otp?phoneNo=${phoneNo}&code=${code}`,{
+            method:"GET",
+            headers:{
+                  Accept:"application/json",
+                  "Content-Type":"application/json"
+            },
+            
+      })
+      .then((data)=>{
+            return data.json()
+                  
+            
+      })
+      .catch(err=>{
+            console.log(err);
+      })
+}
+
 export const signin=(store)=>{
       return fetch(`${API}/store-signin`,{
             method:"POST",
@@ -33,8 +71,8 @@ export const signin=(store)=>{
                   
             
       })
-      .catch(err=>{
-            console.log(err);
+      .catch(error=>{
+            console.log(error);
       })
   }
   

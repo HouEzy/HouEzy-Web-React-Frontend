@@ -6,21 +6,15 @@ import Footer from "../userCore/Footer"
 
 
 
-const UserLayout=({showSearch=true,showCategoryBar=true,children})=>(
+const UserLayout=({showSearch=true,showCategoryBar=true,showSideMenu=true,children})=>(
    <div >
-        <UserMenu className="mb-0" />
-        {showSearch && (
-            <div className="mx-auto bg-info mt-0 ">
-                            
-               <Search />
-               
-            </div>  
-        )}  
-        {showCategoryBar && (
-            <div className="bg-muted mb-3"><CategoryBar /></div>
-        )}
-        <div className="mt-2" style={{minHeight:"80vh"}}>{children}</div>
-
+        {showSideMenu ? (<UserMenu />) : (<UserMenu showSidebar={false} />)}
+        
+        
+        {showSearch && (<div className="mx-autobg-info mt-0 bg-info" ><Search /></div> )}  
+        {showCategoryBar && (<div className="bg-muted mb-3  d-sm-block"><CategoryBar /></div>)}
+        
+        <div className="mt-3">{children}</div>
         <div><Footer /></div>
    </div>
 );

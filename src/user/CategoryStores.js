@@ -27,7 +27,7 @@ const CategoryStores=(props)=>{
 
 
     return(
-        <div>
+        <div className="overflow-auto" style={{height:"100vh"}}>
             <UserLayout >
            <div className="col-12 col-md-10 mx-auto overflow-auto" style={{height:"70vh"}}>
            <div className="row">

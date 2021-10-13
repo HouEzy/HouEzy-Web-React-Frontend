@@ -45,17 +45,21 @@ const UserSignin=()=>{
 
 
    const signinForm=()=>(
+     
       <form>
-         <div className="form-group">
-            <label className="text-muted">E-mail</label>
-            <input onChange={handleChange("email")} type="email"  className="form-control" value={email} />
-         </div>
-         <div className="form-group">
-            <label className="text-muted">Password:</label>
-            <input onChange={handleChange("password")} type="password"  className="form-control" value={password} />
-         </div>
-         <button onClick={clickSubmit} className="btn btn-primary mt-2">Log In</button>
-      </form>
+      <div className="form-group"   >
+         <label className="text-muted">E-mail</label>
+         <input onChange={handleChange("email")} type="email"  style={{zIndex:"1"}}  className="form-control" value={email} />
+      </div>
+      <div className="form-group" style={{zIndex:"100000"}}>
+         <label className="text-muted">Password:</label>
+         <input onChange={handleChange("password")} type="password"  className="form-control" value={password} />
+      </div>
+      <div className="col-5  ms-auto mx-md-auto"   style={{zIndex:"1"}}>
+      <button type="button" onClick={clickSubmit} className="btn btn-info mt-2">Log In as User</button>
+      </div>
+   </form>
+     
    )
 
    const showError=()=>(
@@ -75,16 +79,20 @@ const UserSignin=()=>{
    }
 
    return(
-      <UserLayout title="SignIn" description="Log Into Your Account">
-         <div className="container col-8 col-lg-3 shadow p-5 rounded">
+      <div className=" m-0">
+         <UserLayout showCategoryBar={false} showSideMenu={false}>
+         <div className="col-10 col-md-5 mx-auto shadow p-2 rounded">
          {showLoading()}
          {showError()}
+         <div  >
          {signinForm()}
+         </div>
          {redirectUser()}
          
          </div>
-         {JSON.stringify(values)}
+         
       </UserLayout>
+      </div>
 
    )
 }
