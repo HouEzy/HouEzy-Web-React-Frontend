@@ -1,45 +1,45 @@
-import React,{useState,useEffect} from "react"
-import {updateCartQuantity} from "./userApi"
-import {isAuthenticated} from "../../auth/userAuth"
+import React, { useState, useEffect } from "react"
+import { updateCartQuantity } from "./userApi"
+import { isAuthenticated } from "../../auth/userAuth"
 
 
-const QuantityUpdate=({productItem,setRun = f => f, run = undefined})=>{
+const QuantityUpdate = ({ productItem, setRun = f => f, run = undefined }) => {
 
-    const [count,setCount]=useState()
+    const [count, setCount] = useState()
 
 
-    const increaseCount=(e)=>{
+    const increaseCount = (e) => {
         e.preventDefault()
-        setCount(count+1)
-        updateCartQuantity(isAuthenticated().loggedInMember._id,productItem.productId._id,count+1)
+        setCount(count + 1)
+        updateCartQuantity(isAuthenticated().loggedInMember._id, productItem.productId._id, count + 1)
         setRun(!run);
     }
 
-    const decreaseCount=(e)=>{
+    const decreaseCount = (e) => {
         e.preventDefault()
-       count>1 && setCount(count-1)
-      count>1&& updateCartQuantity(isAuthenticated().loggedInMember._id,productItem.productId._id,count-1)
-        count>1 &&  setRun(!run);
+        count > 1 && setCount(count - 1)
+        count > 1 && updateCartQuantity(isAuthenticated().loggedInMember._id, productItem.productId._id, count - 1)
+        count > 1 && setRun(!run);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setCount(productItem.count)
-     },[productItem])
+    }, [productItem])
 
-    const buttons=()=>(
+    const buttons = () => (
         <div>
             <div class="btn-group" role="group">
                 <button onClick={decreaseCount} className="btn btn-sm btn-primary ">-</button>
-                 <p className="p-2">{count}</p>
-                 <button onClick={increaseCount} className="btn btn-sm btn-primary">+</button>
+                <p className="p-2">{count}</p>
+                <button onClick={increaseCount} className="btn btn-sm btn-primary">+</button>
             </div>
             <div className="row">
-                
+
             </div>
         </div>
     )
 
-    return(
+    return (
         <div>{buttons()}</div>
     )
 }

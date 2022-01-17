@@ -1,22 +1,23 @@
 import React,{useState,useEffect} from "react"
 import {Modal,Button,Form, Option} from "react-bootstrap"
-import {listCollectionsByStore , listUnitValues,createProduct} from "../storeCore/storeApi"
+import {listCollectionsByStore , listUnitValues,updateProduct} from "../storeCore/storeApi"
 import {isAuthenticated} from "../../auth/storeAuth"
 import AddCollection from "./AddCollection"
-const AddProductModal=({setRun = f => f, run = undefined})=>{
+import { MdSearch,MdEdit,MdModeEdit } from "react-icons/md";
 
-   const [show, setShow] = useState(false);
+const UpdateProduct=({props,product})=>{
+    const [show, setShow] = useState(false);
     const [collectionValues,setCollectionValues]=useState([])
     const [unitValues, setUnitValues]=useState([])
-   
-   const [values,setValues]=useState({
-      name:"",
-      description:"",
-      collectionId:"",
-      store:"",
-      mrp:0,
-      sellingPrice:0,
-      unit:"",
+    
+    const [values,setValues]=useState({
+      name:product.name,
+      description:product.description,
+      collectionId:product.collection,
+      store:product.storeId,
+      mrp:product.mrp,
+      sellingPrice:product.sellingPrice,
+      unit:product.unit,
       photos:[],
       loading:false,
       error:"",
@@ -48,7 +49,8 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
       
       setValues({...values,[name]:value})
    }
-   
+
+
     const handleClose = () => setShow(false); 
     const handleShow = () => setShow(true);
 
@@ -69,7 +71,7 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
       console.log(photos);
       setValues({...values,loading:true})
       formData.set("store",isAuthenticated().loggedInMember._id)
-      createProduct(formData).then(data=>{
+      updateProduct(product._id,formData).then(data=>{
          if(data.error)
          {
             setValues({...values,error:data.error})
@@ -88,11 +90,25 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
                error:"",
                success:true,
             })
-            setRun(!run)
+            
          }
       })
       
     }
+
+    useEffect(()=>{
+      const storeId=isAuthenticated().loggedInMember._id;
+     loadUnitValues();
+     loadCollections(storeId)
+     setValues({...values,formData:new FormData()})
+  },[props])
+
+
+    const showSuccess  =()=>(
+      <div className="alert alert-info" style={{display:success ? "":"none"}}>
+           Product Created !!!
+    </div>
+    )
 
     let optionCollection = collectionValues && collectionValues.map((c,i)=>
        <option value={c._id} key={i}>{c.name}</option>
@@ -102,25 +118,15 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
       <option value={unit} >{unit}</option>
     );
 
-      useEffect(()=>{
-         const storeId=isAuthenticated().loggedInMember._id;
-        loadUnitValues();
-        loadCollections(storeId)
-        setValues({...values,formData:new FormData()})
-     },[run])
 
     
-     const showSuccess  =()=>(
-      <div className="alert alert-info" style={{display:success ? "":"none"}}>
-           Product Created !!!
-    </div>
-    )
-
     return(
-        <>
+        <div>
+            <>
         
-        <Button variant="primary" onClick={handleShow}>
-         +  Add Product
+        <Button variant="light" onClick={handleShow}>
+        <MdModeEdit className="h4 text-primary" />
+
         </Button>
   
         <Modal
@@ -195,7 +201,7 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
                   </div>
                   <div className="form-group col-6">
                   <label className="text-muted">Product Image:</label>
-                  <input onChange={handleChange("photos")}   name="photos"  type="file" className="form-control " accept="image/*" multiple  required></input>
+                  <input onChange={handleChange("photos")}   name="photos"  type="file" className="form-control " accept="image/*" ></input>
  
                   </div>
               </div>
@@ -208,7 +214,8 @@ const AddProductModal=({setRun = f => f, run = undefined})=>{
           </Modal.Body>
         </Modal>
       </>
+        </div>
     )
 }
 
-export default AddProductModal
+export default UpdateProduct;

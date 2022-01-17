@@ -1,16 +1,30 @@
-import React, {Component} from "react";
+import React, {Component,useState,useEffect} from "react";
 import {Route,Redirect} from "react-router-dom"
 import {isAuthenticated} from "./storeAuth";
 import moment from "moment"
-
+import {getSubById} from "../core/storeCore/storeApi"
 const days=()=>{
     
 }
 
 
 
-const StoreRoute = ({component:Component,...rest})=>{
-   
+const StoreRoute = ({props,component:Component,...rest})=>{
+
+
+    const [subStatus,setSubStatus]=useState("")
+    
+    const loadSubDetails=()=>{
+        getSubById(isAuthenticated().loggedInMember.rzpSubId).then(data=>{
+            console.log(data.status);
+           setSubStatus(data.status)
+        })
+    }
+    
+    useEffect(()=>{
+      loadSubDetails()
+    },[props])
+
     return(
     <Route {...rest} render={props => !isAuthenticated() || isAuthenticated().loggedInMember.role != "Store" ?(
          <Redirect 
@@ -18,7 +32,7 @@ const StoreRoute = ({component:Component,...rest})=>{
             pathname:"/store/signin",
             state:{from:props.location}
         }}/>
-    ):(isAuthenticated() && isAuthenticated().loggedInMember.role== "Store" && moment().diff(isAuthenticated().loggedInMember.createdAt,"days")<=50)?
+    ):(isAuthenticated() && isAuthenticated().loggedInMember.role== "Store" && moment().diff(isAuthenticated().loggedInMember.createdAt,"days")<=200)?
     (
         <Component {...props} />
     ):(<Redirect 

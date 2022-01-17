@@ -21,6 +21,7 @@ import StoreProducts from "./store/StoreProducts2"
 import Product from "./store/Product"
 import StoreOrders from "./store/StoreOrders"
 import OrderDetails from "./store/OrderDetails"
+import StoreProfile from "./store/StoreProfile"
 
 import AllStores from "./user/AllStores"
 import CategoryStores from "./user/CategoryStores"
@@ -54,6 +55,8 @@ const Routes= ()=>{
                 <StoreRoute path="/store/product/:productId" exact component={Product}></StoreRoute>
                 <StoreRoute path="/store/orders" exact component={StoreOrders}></StoreRoute>
                 <StoreRoute path="/store/orders/:orderId" exact component={OrderDetails}></StoreRoute>
+                <StoreRoute path="/store/account" exact component={StoreProfile}></StoreRoute>
+
 
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}></AdminRoute>
                 <AdminRoute path="/admin/stores" exact component={AdminStores}></AdminRoute>

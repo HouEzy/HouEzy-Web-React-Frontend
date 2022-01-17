@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react"
 import {Link ,Redirect} from "react-router-dom"
 import csc from 'country-state-city'
-import {signup,sendOtp,verifyOtp} from "../auth/storeAuth"
+import {signup,sendOtp,verifyOtp,authenticate} from "../auth/storeAuth"
 import {listCategories} from "../core/storeCore/storeApi"
 import {Dropdown} from "react-bootstrap"
 import { uniqueNamesGenerator, NumberDictionary } from 'unique-names-generator';
@@ -36,10 +36,11 @@ const StoreSignup=()=>{
     closeTime:"",
     redirect:false,
     error:"",
-    success:false
+    success:false,
+    redirectToDashboard:false
   })
   
-  const {name,email,phoneNo,otp,password,confirmPassword,businessName,city,category,address,openTime,closeTime,error,success}=values
+  const {name,email,phoneNo,otp,password,confirmPassword,businessName,city,category,address,openTime,closeTime,error,success,redirectToDashboard}=values
 
   const [count, setCount] = useState(1)
   const [categories,setCategories]=useState([]);
@@ -130,24 +131,26 @@ const clickSubmit=(event)=>{
           }
           else
           {
-                setValues({
-                      ...values,
-                      name:"",
-                      email:"",
-                      password:"",
-                      confirmPassword:"",
-                      businessName:"",
-                      city:"",
-                      category:"",
-                      address:"",
-                      openTime:"",
-                      closeTime:"",
-                      phoneNo:"",
-                      otp:"",
-                      error:"",
-                      redirect:true,
-                      success:true
-                })
+             authenticate(data,() =>{
+              setValues({
+                ...values,
+                name:"",
+                email:"",
+                password:"",
+                confirmPassword:"",
+                businessName:"",
+                city:"",
+                category:"",
+                address:"",
+                openTime:"",
+                closeTime:"",
+                phoneNo:"",
+                otp:"",
+                error:"",
+                redirectToDashboard:true,
+                success:true
+          })
+             })
           }
     })
   }
@@ -320,6 +323,13 @@ const signupForm=()=>(
       </div>
 )
 
+const redirectUser=()=>{
+  if(redirectToDashboard)
+  {
+    return <Redirect to="/store/dashboard"/> 
+  }
+}
+
     return (
         
             <div style={{height:"100vh",backgroundColor:"#19475f"}} className="d-flex align-items-center overflow-auto">
@@ -329,6 +339,7 @@ const signupForm=()=>(
                   {showError()}
                   {showSuccess()}                 
                   {signupForm()}
+                  {redirectUser()}
              </div>
              
             </div>

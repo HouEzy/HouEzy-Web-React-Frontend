@@ -11,6 +11,7 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import AddProductModal from "../core/storeCore/AddProductModal"
 import { MdSearch,MdDeleteForever,MdShare,MdEdit } from "react-icons/md";
 import {Helmet} from "react-helmet"
+import UpdateProduct from "../core/storeCore/UpdateProduct"
 
 
 const StoreProducts=(props)=>{
@@ -162,6 +163,7 @@ const StoreProducts=(props)=>{
                   <th scope="col">Price</th>
                   <th scope="col">InStock</th>
                   <th scope="col">Actions</th>
+                  <th scope="col">Delete</th>
              </tr>
              </thead>
              <tbody>
@@ -172,7 +174,8 @@ const StoreProducts=(props)=>{
                   <td className="my-auto align-middle">{p.name}</td>
                   <td className="my-auto align-middle">₹{p.sellingPrice}<p className="text-decoration-line-through">₹{p.mrp}</p></td>
                   <td className="my-auto align-middle"><BootstrapSwitchButton onChange={()=>{updateProductStatus(p._id)}} checked={p.inStock}  size="xs"  onstyle="primary" offstyle="secondary" /></td>
-                  <td className="my-auto align-middle"><MdShare className="h4"/><MdEdit className="text-primary h4"/><MdDeleteForever className="text-danger h4" /></td>
+                  <td className="my-auto align-middle"><span className="row"><UpdateProduct product={p}/></span></td>
+                  <td className="my-auto align-middle"><MdDeleteForever className="h4 text-danger " /></td>
                 </tr>   
              ))}
              </tbody>

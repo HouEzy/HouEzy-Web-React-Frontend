@@ -81,7 +81,7 @@ const Header = () => {
           <div className="logotext">
               {/* small and big change using menucollapse state */}
               <div className="d-none d-lg-flex col-12 mx-auto p-1 justify-content-center">
-                <div className="col-10  my-auto"><img className="" src="/images/BIZZNECT-logo-white.png" width="100%" height="100%"/></div>
+                <div className="col-10  my-auto h1 text-white text-center" style={{fontFamily:"serif"}}>BizzDost</div>
 
 
               </div>
@@ -94,6 +94,7 @@ const Header = () => {
           </SidebarHeader>
           <SidebarContent className="overflow-auto" >
             <Menu iconShape="square">
+              
               <MenuItem icon={<MdDashboard />}>
                 Dashboard<Link to="/store/dashboard" />
               </MenuItem>
@@ -101,14 +102,14 @@ const Header = () => {
               <MenuItem icon={<RiProductHuntLine />}>Products <Link to="/store/products" /></MenuItem>
               <MenuItem icon={<MdBorderOuter />}>Orders<Link to="/store/orders" /></MenuItem>
               <MenuItem icon={<MdGraphicEq />}>Sales</MenuItem>
-              <MenuItem icon={<BiCog />}>Profile</MenuItem>
+              <MenuItem icon={<BiCog />}>Account <Link to="/store/account"></Link></MenuItem>
               
 
             </Menu>
           </SidebarContent>
           <SidebarFooter>
-            <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />} onClick={()=>signout()}>LogOut</MenuItem>
+            <Menu iconShape="square" className="text-center">
+            <StoreOpenClose/>
             </Menu>
           </SidebarFooter>
         </ProSidebar>

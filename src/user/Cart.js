@@ -5,12 +5,13 @@ import {Link} from "react-router-dom"
 import ProductImages from "../core/userCore/ProductImage"
 import RemoveFromCart from "../core/userCore/RemoveFromCart"
 import QuantityUpdate from "../core/userCore/QuantityUpdate"
-import {getCart,readStoreByLinkName} from "../core/userCore/userApi"
+import {getCart,readStoreByLinkName,emptyCart} from "../core/userCore/userApi"
 import {isAuthenticated} from "../auth/userAuth"
 const Cart=(props)=>{
     
     const [store,setStore]=useState({})
     const [items,setItems]=useState([])
+    const [storeCartItem,setStoreCartItem]=useState([])
     const [run,setRun]=useState(false)
 
     const loadStoreByLink=(linkName)=>{
@@ -25,12 +26,23 @@ const Cart=(props)=>{
             }
         })
     }
+
+    const checkCartStore=(userId)=>{
+        
+        
+    }
     
     const loadCartItems=(userId)=>{
        getCart(userId).then(data=>{
            if(data.error)
            {console.log(data.error);}
-           else{setItems(data)}
+           else{
+               console.log(data);
+               console.log(data[0].storeId);
+               console.log(store._id);
+               console.log(data[0].storeId===store._id);
+               setItems(data)
+            }
        })
     }
 
@@ -55,7 +67,7 @@ const Cart=(props)=>{
 
     const cartProductCard=(item)=>(
         <div className="card ">
-          <Link to={`/product/${item.productId._id}`}  className="text-decoration-none text-dark">
+          <Link to={``}  className="text-decoration-none text-dark">
           
            <div className="row">
                <div className="col-3  my-auto">

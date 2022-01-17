@@ -5,6 +5,8 @@ import {authenticate,signin} from "../../auth/userAuth"
 
 const SignupModal=()=>{
 
+  const theme="#00334E"
+
     const [count, setCount] = useState(1)
     const [show, setShow] = useState(false);
     const [values,setValues]=useState({
@@ -53,8 +55,8 @@ const SignupModal=()=>{
                 authenticate(data,()=>{
                    setValues({
                        ...values,
-                      redirectToReferrer:true
-                       
+                      redirectToReferrer:true,
+                      success:true 
                  })
                })  
              }
@@ -99,13 +101,14 @@ const SignupModal=()=>{
 
           <Modal.Body>
             <form >
+            {showSuccess()}
               {count===1 ? (
                   <div>
                   <div className="form-group">
                     <label className="text-muted">Phone Number</label>
                     <div className="input-group">
                       <div className="input-group-prepend my-auto" >
-                         <span className="input-group-text text-light " style={{backgroundColor:"#1B0044"}}>+91</span>
+                         <span className="input-group-text text-light " style={{backgroundColor:theme}}>+91</span>
                       </div>
                     <input
                       type="tel"
@@ -119,7 +122,7 @@ const SignupModal=()=>{
                    
                   </div>
                   <div className="">
-                    <button onClick={handleSendOtp} className=" mt-3 col-12 btn btn-lg btn-block text-light " disabled={!phoneNo} style={{backgroundColor:"#1B0044"}} >Get Started</button>
+                    <button onClick={handleSendOtp} className=" mt-3 col-12 btn btn-lg btn-block text-light " disabled={!phoneNo} style={{backgroundColor:theme}} >Get Started</button>
                   </div>
                   </div>
               ):null}
@@ -138,7 +141,7 @@ const SignupModal=()=>{
                   />
                 </div>
                 <div className="">
-                  <button onClick={handleVerifyOtp} className="col-12 mt-3 btn btn-primary btn-lg btn-block" style={{backgroundColor:"#1B0044"}}>Verify OTP</button>
+                  <button onClick={handleVerifyOtp} className="col-12 mt-3 btn btn-primary btn-lg btn-block" style={{backgroundColor:theme}}>Verify OTP</button>
                 </div>
                 </div>
               ): null}
@@ -149,6 +152,12 @@ const SignupModal=()=>{
         </Modal>
       </div>
   )
+
+  const showSuccess  =()=>(
+    <div className="alert alert-info" style={{display:success ? "":"none"}}>
+         You are Signed In Successfully!!
+    </div>
+)
 
     return(
         <div>

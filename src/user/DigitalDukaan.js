@@ -109,7 +109,24 @@ const DigitalDukaan=(props)=>{
             </ul>
         </div>
     )
+    
+    const displayCollectionsMobile=()=>(
+        <div className="row flex-nowrap">
+         
+        <div className="w-auto">
+           <button onClick={clickCollection} className="btn  btn-center small h-75 mr-2" value={0}>All</button>
+        </div>
+        {collections && collections.map((collection,i)=>(
+         <div className="w-auto">
+           <button onClick={clickCollection}   key={i} className="btn  btn-center small h-75 mr-3" value={collection._id}>{collection.name}</button>
+        </div>
+            
 
+        ))}
+        
+    
+     </div>
+    )
     const ShowProducts=()=>(
         <div className="col-12 col-md-12 m-0">
             
@@ -122,6 +139,8 @@ const DigitalDukaan=(props)=>{
     return(
         <div className="" >
             <UserStoreLayout store={store} >
+            <div className="d-md-none p-2 mb-3 overflow-auto">{displayCollectionsMobile()}</div>
+
             <div className="col-12 col-md-12 ml-auto row m-0 p-0">
                 <div className="d-none d-md-block p-0 col-md-3 overflow-auto " style={{height:"100vh",borderLeft:"5px solid #B2B1B9",borderRight:"5px solid #B2B1B9",overflow:"hidden"}}>{showCollections()}</div>
                 <div className="col-12 col-md-6 m-0 p-0" style={{}}>{ShowProducts()}</div>

@@ -43,6 +43,23 @@ export const listCollectionsByStore=(storeId)=>{
    })
 }
 
+export const updateCollection=(collectionId,name)=>{
+    return fetch(`${API}/store/collection/update/${collectionId}`,{
+        method:"PUT",
+        headers:{
+            Accept:"application/json",
+            "Content-Type":"application/json"
+      },
+      body:JSON.stringify({name:name})
+    })
+    .then(response=>{
+        return response.json()
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
 export const listUnitValues=()=>{
     return fetch(`${API}/product/unitvalues`,{
         method:"GET"
@@ -58,6 +75,25 @@ export const listUnitValues=()=>{
 export const createProduct=(product)=>{
     return fetch(`${API}/product/create`,{
           method:"POST",
+          headers:{
+                Accept:"application/json",
+                
+          },
+          body:product
+    })
+    .then((data)=>{
+          return data.json({product})
+                
+          
+    })
+    .catch(err=>{
+          console.log(err);
+    })
+}
+
+export const updateProduct=(productId,product)=>{
+    return fetch(`${API}/product/${productId}/update/`,{
+          method:"PUT",
           headers:{
                 Accept:"application/json",
                 
@@ -270,12 +306,9 @@ export const verifySub=(verifyData)=>{
 }
 
 export const getSubById=(subId)=>{
-    return fetch(`${API}/sub/byid`,{
+    return fetch(`${API}/sub/byid/${subId}`,{
         method:"GET",
        
-        body:JSON.stringify({
-            subId:subId
-        })
     })
     .then(response =>{
         return response.json();

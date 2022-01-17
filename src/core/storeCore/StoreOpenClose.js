@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from "react"
 import {updateStoreStatus} from "./storeApi"
 import {isAuthenticated} from "../../auth/storeAuth"
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+
 
 const StoreOpenClose=(props)=>{
     
@@ -37,11 +39,10 @@ const StoreOpenClose=(props)=>{
       setStatus(JSON.parse(localStorage.getItem("storeStatus")))
      },[props])
   return(
-    <div className="form-check form-switch">
-        <button onClick={handleChange} className="btn btn-sm btn-info d-flex ">{status?`Close Shop`:`Open Shop`}</button>
-        <p className=" ml-1 text-dark">Store is {status?`Open`:`Closed`}</p>
+    <div className="" style={{zIndex:"9999999"}}>
+        <BootstrapSwitchButton onChange={()=>{handleChange()}} checked={status}  size="lg" onlabel="Open" offlabel="Closed" onstyle="success" offstyle="danger" />
     </div>
   )
 }
-
+ 
 export default StoreOpenClose
