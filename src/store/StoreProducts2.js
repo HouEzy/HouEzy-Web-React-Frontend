@@ -22,6 +22,9 @@ const StoreProducts=(props)=>{
     const [products,setProducts]=useState([])
     const [run,setRun]=useState(false)
 
+    const theme = "#00334E"
+
+
     const storeId = isAuthenticated().loggedInMember._id
 
     const loadCollections = storeId =>{
@@ -137,11 +140,11 @@ const StoreProducts=(props)=>{
             <div className="row flex-nowrap ">
          
          <div className="w-auto badge badge-pill" style={{zIndex:"0"}}>
-            <button onClick={clickCollection} className="btn  btn-center small h-75 mr-2" value={0} style={{backgroundColor:selectedCollection == 0 ? '#0275d8': 'white',color:selectedCollection == 0 ? 'white': 'black'}}>All</button>
+            <button onClick={clickCollection} className="btn  btn-center small h-75 mr-2" value={0} style={{borderBottom:selectedCollection == 0 ? `5px solid #0275d8`: 'white',color:selectedCollection == 0 ? `${theme}`: 'black'}}>All</button>
          </div>
          {collections && collections.map((collection,i)=>(
           <div className="w-auto badge badge-pill" style={{zIndex:"1"}}>
-            <button onClick={clickCollection}   key={i} className="btn  btn-center  small h-75 mr-3" value={collection._id} style={{backgroundColor:selectedCollection == collection._id ? '#0275d8': 'white',color:selectedCollection == collection._id ? 'white': 'black'}}>{collection.name}</button>
+            <button onClick={clickCollection}   key={i} className="btn  btn-center  small h-75 mr-3" value={collection._id} style={{borderBottom:selectedCollection == collection._id ? `5px solid #0275d8`: 'white',color:selectedCollection == collection._id ? `${theme}`: 'black'}}>{collection.name}</button>
          </div>
          ))}
          

@@ -24,7 +24,7 @@ const StoreDashboard=(props)=>{
     const headline=()=>(
         <nav className="navbar navbar-default  navbar-expand nav-primary ml-2 bg-transparent shadow-lg  " style={{zIndex:"-1"}}>
                      
-                     <Link className="navbar-brand " to="/"><h4 className="text-dark" style={{zIndex:"0"}}>DashBoard</h4></Link>
+                     <Link className="navbar-brand " to="/"><h4 className="text-dark ms-2" style={{zIndex:"0"}}>{isAuthenticated().loggedInMember.businessName}</h4></Link>
                                           
                      <ul className="navbar-nav ms-auto">
                        
@@ -80,7 +80,7 @@ const StoreDashboard=(props)=>{
                 <br/>
                 <div className="row">
                 <p className="col-12 col-md-9">
-               <Link target={"_blank"} to={`/${isAuthenticated().loggedInMember.linkName}`} className="h6 border p-1">http://Bizzania.in/{isAuthenticated().loggedInMember.linkName}</Link>
+               <Link target={"_blank"} to={`/${isAuthenticated().loggedInMember.linkName}`} className="h6 border p-1">https://byznex.in/{isAuthenticated().loggedInMember.linkName}</Link>
                </p>
                <div className="col-6 col-md-3"><button onClick={() => {navigator.clipboard.writeText(`http://BizzCase.in/${isAuthenticated().loggedInMember.linkName}`)}} className="btn btn-sm btn-primary ">Copy Link</button></div>
                 </div>

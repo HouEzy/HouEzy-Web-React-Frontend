@@ -32,7 +32,7 @@ const StoreRoute = ({props,component:Component,...rest})=>{
             pathname:"/store/signin",
             state:{from:props.location}
         }}/>
-    ):(isAuthenticated() && isAuthenticated().loggedInMember.role== "Store" && moment().diff(isAuthenticated().loggedInMember.createdAt,"days")<=200)?
+    ):(isAuthenticated() && isAuthenticated().loggedInMember.role== "Store" && moment().diff(isAuthenticated().loggedInMember.createdAt,"days")<=1000)?
     (
         <Component {...props} />
     ):(<Redirect 

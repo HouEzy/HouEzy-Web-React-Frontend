@@ -27,7 +27,7 @@ import { MdDashboard,MdCollectionsBookmark,MdBorderOuter,MdGraphicEq } from "rea
 
 //import sidebar css from react-pro-sidebar module and our custom css 
 import "react-pro-sidebar/dist/css/styles.css";
-import "../../styles/storeSideBar.css";
+//import "../../styles/storeSideBar.css";
 
 
 const Header = () => {
@@ -47,7 +47,7 @@ const Header = () => {
   };
 
   return (
-
+//082032
     <>
     <div>
     
@@ -77,25 +77,24 @@ const Header = () => {
             
           {/* collapsed props to change menu size using menucollapse state */}
         <ProSidebar collapsed={menuCollapse} >
-          <SidebarHeader>
+          <SidebarHeader  >
           <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <div className="d-none d-lg-flex col-12 mx-auto p-1 justify-content-center">
-                <div className="col-10  my-auto h1 text-white text-center" style={{fontFamily:"serif"}}>BizzDost</div>
+              <div className="d-none d-lg-flex col-12 mx-auto p-3 justify-content-center">
+                <div className="col-12  my-auto  text-white text-center" ><span className="float-start my-auto"><img src="/images/logo-white.png" width="40px" height="40px"></img></span><span className="h2 my-auto mt-3">Byznex</span></div>
 
 
               </div>
               
-              <hr/>
-              <h4 className="p-1 text-light  text-wrap text-center" >{isAuthenticated().loggedInMember.businessName}</h4>
+             
             </div>
             
            
           </SidebarHeader>
-          <SidebarContent className="overflow-auto" >
-            <Menu iconShape="square">
+          <SidebarContent className="overflow-auto" style={{overflowY:"hidden"}}>
+            <Menu iconShape="square" className="m-0">
               
-              <MenuItem icon={<MdDashboard />}>
+              <MenuItem className="" icon={<MdDashboard />}>
                 Dashboard<Link to="/store/dashboard" />
               </MenuItem>
               <MenuItem icon={<RiProductHuntLine />}>Collections <Link to="/store/collections" /></MenuItem>
@@ -103,8 +102,7 @@ const Header = () => {
               <MenuItem icon={<MdBorderOuter />}>Orders<Link to="/store/orders" /></MenuItem>
               <MenuItem icon={<MdGraphicEq />}>Sales</MenuItem>
               <MenuItem icon={<BiCog />}>Account <Link to="/store/account"></Link></MenuItem>
-              
-
+             
             </Menu>
           </SidebarContent>
           <SidebarFooter>

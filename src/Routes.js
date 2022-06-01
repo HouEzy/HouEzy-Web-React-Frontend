@@ -1,5 +1,8 @@
-import React from "react"
+import React,{useState,useEffect} from "react"
 import {BrowserRouter,Switch,Route} from "react-router-dom"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import StoreRoute from "./auth/StoreRoute"
 import AdminRoute from "./auth/AdminRoute"
 
@@ -36,7 +39,13 @@ import AboutUs from "./user/AboutUs"
 import DigitalDukaan from "./user/DigitalDukaan"
 
 
+
+
 const Routes= ()=>{
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+      }, []);
     return (
        <BrowserRouter>           
             <Switch>
